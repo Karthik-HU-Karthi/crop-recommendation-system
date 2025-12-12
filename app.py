@@ -75,7 +75,20 @@ crop_info = {
     'coffee': {'image': 'https://upload.wikimedia.org/wikipedia/commons/4/45/Coffee_berries_1.jpg', 'desc': 'Coffee prefers cool to warm tropical highland climates.'}
 }
 
-# ... (Sidebar code remains same) ...
+# Sidebar
+with st.sidebar:
+    st.image("https://cdn-icons-png.flaticon.com/512/6064/6064973.png", width=100)
+    st.header("About App")
+    st.markdown("""
+    This **Smart Crop Recommendation System** analyzes:
+    - Soil Nutrients (N, P, K)
+    - Weather Conditions (Temp, Humidity, Rainfall)
+    - Soil pH
+    
+    ...to suggest the **optimal crop** for maximum yield!
+    """)
+    st.markdown("---")
+    st.info("Built with Machine Learning (Random Forest)")
 
 # Main Content
 st.markdown("<h1 class='main-header'>🌱 Smart Crop Recommendation System</h1>", unsafe_allow_html=True)
