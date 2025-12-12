@@ -161,10 +161,27 @@ with tab2:
     st.subheader("🌾 Supported Crops")
     st.write("The model can recommend the following crops:")
     
-    # Dynamic list of crops
-    crops = list(crop_info.keys())
-    # Display in badges or a clean list
-    st.write(", ".join([c.capitalize() for c in crops]))
+    st.markdown("---")
+    st.subheader("🌾 Supported Crops & Optimal Conditions")
+    st.write("Below is the average requirement for each crop based on our training data:")
+    
+    # Load Data to show stats
+    try:
+        df = pd.read_csv('data/Crop_recommendation.csv')
+        # Group by label to get average conditions
+        pivot = df.groupby('label').mean().reset_index()
+        # Rename columns for better display
+        pivot.columns = ['Crop', 'Nitrogen (N)', 'Phosphorus (P)', 'Potassium (K)', 'Temp (°C)', 'Humidity (%)', 'pH', 'Rainfall (mm)']
+        # Formatting
+        st.dataframe(pivot.style.format({
+            'Temp (°C)': '{:.1f}',
+            'Humidity (%)': '{:.1f}',
+            'pH': '{:.2f}',
+            'Rainfall (mm)': '{:.1f}'
+        }), use_container_width=True)
+        
+    except FileNotFoundError:
+        st.error("Could not load data for stats table. Ensure 'data/Crop_recommendation.csv' exists.")
     
     st.markdown("---")
     st.info("The model was tested on a dataset of 2200 samples with 22 different crop labels.")
