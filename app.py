@@ -94,7 +94,7 @@ with st.sidebar:
 # Main Content
 st.markdown("<h1 class='main-header'>🌱 Smart Crop Recommendation System</h1>", unsafe_allow_html=True)
 # Tabs
-tab1, tab2 = st.tabs(["🚜 Crop Recommendation", "📊 Model Info"])
+tab1, tab2, tab3 = st.tabs(["🚜 Crop Recommendation", "📊 Model Info", "🧑‍💻 About Developer"])
 
 with tab1:
     st.markdown("Enter your farm's Soil & Weather details below:")
@@ -158,10 +158,6 @@ with tab2:
         st.metric(label="Total Crops Supported", value=f"{len(crop_info)}")
     
     st.markdown("---")
-    st.subheader("🌾 Supported Crops")
-    st.write("The model can recommend the following crops:")
-    
-    st.markdown("---")
     st.subheader("🌾 Supported Crops & Optimal Conditions")
     st.write("Below is the average requirement for each crop based on our training data:")
     
@@ -185,5 +181,18 @@ with tab2:
     
     st.markdown("---")
     st.info("The model was tested on a dataset of 2200 samples with 22 different crop labels.")
+
+with tab3:
+    st.header("🧑‍💻 Developer Information")
+    st.info("""
+    **Developed by:**  
+    Karthik Kumar Honnapura Umashankar
+    
+    **Student ID:**  
+    GH1032361
+    
+    **College:**  
+    Gisma University of Applied Sciences
+    """)
 
 
