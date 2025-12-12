@@ -5,7 +5,7 @@
 ---
 
 ## 🚀 Live Demo
-**[Click here to try the App](https://crop-recommendation-system.streamlit.app/)**
+**[Click here to try the App](https://agri-crop-recommendation-system.streamlit.app/)**
 
 ---
 
