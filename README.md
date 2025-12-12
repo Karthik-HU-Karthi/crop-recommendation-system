@@ -23,8 +23,6 @@ Farming is becoming increasingly difficult due to unpredictable weather and soil
 ## 🎥 Video Demonstration
 [Link to Video Demonstration](Put_Your_Video_Link_Here)
 
-*(Please edit this file and paste your YouTube/Drive link above before submitting)*
-
 ---
 
 ## 📂 Project Structure
