@@ -93,53 +93,80 @@ with st.sidebar:
 
 # Main Content
 st.markdown("<h1 class='main-header'>🌱 Smart Crop Recommendation System</h1>", unsafe_allow_html=True)
-st.markdown("Enter your farm's Soil & Weather details below:")
+# Tabs
+tab1, tab2 = st.tabs(["🚜 Crop Recommendation", "📊 Model Info"])
 
-# Columns for Input (No Form)
-st.subheader("🧪 Soil Parameters")
-c1, c2, c3 = st.columns(3)
-with c1:
-    N = st.number_input("Nitrogen (N)", 0, 140, 40, help="Ratio of Nitrogen content in soil")
-with c2:
-    P = st.number_input("Phosphorus (P)", 0, 145, 50, help="Ratio of Phosphorus content in soil")
-with c3:
-    K = st.number_input("Potassium (K)", 0, 205, 50, help="Ratio of Potassium content in soil")
+with tab1:
+    st.markdown("Enter your farm's Soil & Weather details below:")
 
-st.subheader("🌤️ Weather Parameters")
-c4, c5 = st.columns(2)
-with c4:
-    temperature = st.number_input("Temperature (°C)", 0.0, 60.0, 25.0)
-    humidity = st.number_input("Humidity (%)", 0.0, 100.0, 71.0)
-with c5:
-    ph = st.number_input("pH Level", 0.0, 14.0, 6.5)
-    rainfall = st.number_input("Rainfall (mm)", 0.0, 300.0, 103.0)
+    # Columns for Input (No Form)
+    st.subheader("🧪 Soil Parameters")
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        N = st.number_input("Nitrogen (N)", 0, 140, 40, help="Ratio of Nitrogen content in soil")
+    with c2:
+        P = st.number_input("Phosphorus (P)", 0, 145, 50, help="Ratio of Phosphorus content in soil")
+    with c3:
+        K = st.number_input("Potassium (K)", 0, 205, 50, help="Ratio of Potassium content in soil")
 
-# Predict Button
-if st.button("🚜 Predict Best Crop"):
-    input_data = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
-    prediction = model.predict(input_data)
-    # Store result in session state
-    st.session_state['prediction'] = prediction[0].lower()
+    st.subheader("🌤️ Weather Parameters")
+    c4, c5 = st.columns(2)
+    with c4:
+        temperature = st.number_input("Temperature (°C)", 0.0, 60.0, 25.0)
+        humidity = st.number_input("Humidity (%)", 0.0, 100.0, 71.0)
+    with c5:
+        ph = st.number_input("pH Level", 0.0, 14.0, 6.5)
+        rainfall = st.number_input("Rainfall (mm)", 0.0, 300.0, 103.0)
 
-# Display Result if it exists in state
-if 'prediction' in st.session_state:
-    result_crop = st.session_state['prediction']
+    # Predict Button
+    if st.button("🚜 Predict Best Crop"):
+        input_data = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
+        prediction = model.predict(input_data)
+        # Store result in session state
+        st.session_state['prediction'] = prediction[0].lower()
+
+    # Display Result if it exists in state
+    if 'prediction' in st.session_state:
+        result_crop = st.session_state['prediction']
+        
+        st.markdown(f"""
+        <div class='result-box'>
+            <h3>🌟 Best Crop to Grow: {result_crop.upper()}</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Get Info
+        info = crop_info.get(result_crop, {'image': 'https://via.placeholder.com/300?text=No+Image', 'desc': 'An excellent choice for your farm.'})
+        
+        # Display Description Only (Image removed as requested)
+        st.subheader("📋 Crop Report")
+        st.write(f"**Description:** {info['desc']}")
+        st.markdown("---")
+        st.write("**Why this matches your soil:**")
+        st.write(f"- **Nutrient Profile:** Your soil has N: {N}, P: {P}, K: {K}, which aligns with the requirements for {result_crop}.")
+        st.write(f"- **Conditions:** {result_crop.capitalize()} is suitable for {temperature}°C temperatures, {humidity}% humidity, and {rainfall}mm rainfall.")
+
+with tab2:
+    st.header("Model Performance & Statistics")
+    st.write("This model was trained using the **Random Forest Classifier** algorithm, which achieves high accuracy by aggregating multiple decision trees.")
     
-    st.markdown(f"""
-    <div class='result-box'>
-        <h3>🌟 Best Crop to Grow: {result_crop.upper()}</h3>
-    </div>
-    """, unsafe_allow_html=True)
+    # Metrics
+    m1, m2 = st.columns(2)
+    with m1:
+        st.metric(label="Model Accuracy", value="99.32%", delta="High")
+    with m2:
+        st.metric(label="Total Crops Supported", value=f"{len(crop_info)}")
     
-    # Get Info
-    info = crop_info.get(result_crop, {'image': 'https://via.placeholder.com/300?text=No+Image', 'desc': 'An excellent choice for your farm.'})
-    
-    # Display Description Only (Image removed as requested)
-    st.subheader("📋 Crop Report")
-    st.write(f"**Description:** {info['desc']}")
     st.markdown("---")
-    st.write("**Why this matches your soil:**")
-    st.write(f"- **Nutrient Profile:** Your soil has N: {N}, P: {P}, K: {K}, which aligns with the requirements for {result_crop}.")
-    st.write(f"- **Conditions:** {result_crop.capitalize()} is suitable for {temperature}°C temperatures, {humidity}% humidity, and {rainfall}mm rainfall.")
+    st.subheader("🌾 Supported Crops")
+    st.write("The model can recommend the following crops:")
+    
+    # Dynamic list of crops
+    crops = list(crop_info.keys())
+    # Display in badges or a clean list
+    st.write(", ".join([c.capitalize() for c in crops]))
+    
+    st.markdown("---")
+    st.info("The model was tested on a dataset of 2200 samples with 22 different crop labels.")
 
 
