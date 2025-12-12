@@ -81,10 +81,6 @@ crop_info = {
 st.markdown("<h1 class='main-header'>🌱 Smart Crop Recommendation System</h1>", unsafe_allow_html=True)
 st.markdown("Enter your farm's Soil & Weather details below:")
 
-# Main Content
-st.markdown("<h1 class='main-header'>🌱 Smart Crop Recommendation System</h1>", unsafe_allow_html=True)
-st.markdown("Enter your farm's Soil & Weather details below:")
-
 # Columns for Input (No Form)
 st.subheader("🧪 Soil Parameters")
 c1, c2, c3 = st.columns(3)
@@ -121,21 +117,15 @@ if 'prediction' in st.session_state:
     </div>
     """, unsafe_allow_html=True)
     
-    # Display Image and Desc
-    col_img, col_desc = st.columns([1, 2])
-    
-    # Use static dictionary
+    # Get Info
     info = crop_info.get(result_crop, {'image': 'https://via.placeholder.com/300?text=No+Image', 'desc': 'An excellent choice for your farm.'})
     
-    with col_img:
-        # Fixed specific parameter deprecation warning
-        st.image(info['image'], caption=f"{result_crop.capitalize()}", use_container_width=True)
-    with col_desc:
-        st.subheader("📋 Crop Report")
-        st.write(f"**Description:** {info['desc']}")
-        st.markdown("---")
-        st.write("**Why this matches your soil:**")
-        st.write(f"- **Nutrient Profile:** Your soil has N: {N}, P: {P}, K: {K}, which aligns with the requirements for {result_crop}.")
-        st.write(f"- **Conditions:** {result_crop.capitalize()} is suitable for {temperature}°C temperatures, {humidity}% humidity, and {rainfall}mm rainfall.")
+    # Display Description Only (Image removed as requested)
+    st.subheader("📋 Crop Report")
+    st.write(f"**Description:** {info['desc']}")
+    st.markdown("---")
+    st.write("**Why this matches your soil:**")
+    st.write(f"- **Nutrient Profile:** Your soil has N: {N}, P: {P}, K: {K}, which aligns with the requirements for {result_crop}.")
+    st.write(f"- **Conditions:** {result_crop.capitalize()} is suitable for {temperature}°C temperatures, {humidity}% humidity, and {rainfall}mm rainfall.")
 
 
