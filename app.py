@@ -38,6 +38,7 @@ st.markdown("""
         padding: 20px;
         background-color: #dff0d8;
         border-left: 6px solid #3c763d;
+        color: #2c3e50;
         border-radius: 5px;
         margin-top: 20px;
     }
