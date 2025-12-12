@@ -1,40 +1,70 @@
 # Crop Recommendation System for Farmers 🌾
 
-## Overview
-A Machine Learning-based application that recommends the best crop to grow based on soil nutrients (Nitrogen, Phosphorus, Potassium) and environmental conditions (Temperature, Humidity, pH, Rainfall).
+**A Smart Agriculture Solution using Machine Learning**
 
-## Repository Structure
--   `data/`: Contains the dataset (`Crop_recommendation.csv`).
--   `src/`: Source code for EDA and training.
--   `models/`: Saved Random Forest model.
--   `report/`: Project report documentation and images.
--   `app.py`: Streamlit web application.
+---
 
-## Installation
+## 🚀 Live Demo
+**[Click here to try the App](https://crop-recommendation-system.streamlit.app/)**
 
-1.  Clone the repository:
+---
+
+## 📌 Overview
+Farming is becoming increasingly difficult due to unpredictable weather and soil conditions. This **Smart Crop Recommendation System** helps farmers make data-driven decisions. By analyzing **7 key parameters** (N, P, K, Temperature, Humidity, pH, Rainfall), the system predicts the most suitable crop out of **22 possible choices** with **99.32% accuracy**.
+
+### Key Features
+*   **🌱 Real-time Prediction**: Instant crop suggestion based on soil content.
+*   **🖼️ Visual Results**: Shows high-quality images of the recommended crop.
+*   **📊 Model Info Tab**: Displays performance metrics and typical parameter requirements for all crops.
+*   **🧑‍💻 Developer Tab**: Information about the creator.
+
+---
+
+## 🎥 Video Demonstration
+[Link to Video Demonstration](Put_Your_Video_Link_Here)
+
+*(Please edit this file and paste your YouTube/Drive link above before submitting)*
+
+---
+
+## 📂 Project Structure
+```text
+/
+├── data/               # Dataset (Crop_recommendation.csv)
+├── models/             # Trained Random Forest Model (.pkl)
+├── src/                # Training and EDA scripts
+├── app.py              # Main Streamlit Application
+├── requirements.txt    # Usage Dependencies
+└── README.md           # Project Documentation
+```
+
+---
+
+## 🛠️ Installation & Usage
+
+1.  **Clone the Repository**
     ```bash
-    git clone <repository_url>
-    cd "Crop Recommendation System for Farmers"
+    git clone https://github.com/Karthik-HU-Karthi/crop-recommendation-system.git
+    cd crop-recommendation-system
     ```
 
-2.  Install dependencies:
+2.  **Install Dependencies**
     ```bash
     pip install -r requirements.txt
     ```
 
-## Usage
-
-1.  **Run the Application**:
+3.  **Run the App**
     ```bash
     python -m streamlit run app.py
     ```
-    The app will open in your browser at `http://localhost:8501`.
 
-2.  **Retrain Model** (Optional):
-    ```bash
-    python src/train_model.py
-    ```
+---
 
-## Project Report
-The detailed project report can be found in the `report/` directory.
+## 👨‍🎓 Student Information
+*   **Name:** Karthik Kumar Honnapura Umashankar
+*   **Student ID:** GH1032361
+*   **College:** Gisma University of Applied Sciences
+
+---
+
+*Verified locally and deployed to Streamlit Cloud.*
